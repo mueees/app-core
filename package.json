@@ -1,5 +1,5 @@
 {
-  "name": "app-core",
+  "name": "mue-core",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mueees/app-core.git"
+    "url": "git+https://github.com/mueees/mue-core.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mueees/app-core/issues"
+    "url": "https://github.com/mueees/mues-core/issues"
   },
-  "homepage": "https://github.com/mueees/app-core#readme",
+  "homepage": "https://github.com/mueees/mue-core#readme",
   "dependencies": {
     "body-parser": "1.15.1",
     "chai": "3.5.0",

@@ -3,7 +3,7 @@
 let config = require('../../config');
 let _ = require('lodash');
 let assert = require('chai').assert;
-let RequestAction = require('../request');
+let RequestAction = require('../request').action;
 let hubConfig = _.cloneDeep(config.get('services:hub'));
 
 class RequestToServiceAction extends RequestAction {

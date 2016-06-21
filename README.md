@@ -1,1 +1,1 @@
-# app-core
+# mue-core
