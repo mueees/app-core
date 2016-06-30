@@ -11,8 +11,3 @@ exports.getHttpError = function (code, message) {
 
     return new HttpError(code, message);
 };
-
-/*
-* Service to HUB request
-*
-* */

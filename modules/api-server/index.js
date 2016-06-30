@@ -1,5 +1,6 @@
 var http = require('http'),
     express = require('express'),
+    _ = require('lodash'),
     assert = require('chai').assert,
     bodyParser = require('body-parser'),
     HttpError = require('../error').HttpError,
@@ -15,11 +16,14 @@ module.exports = function (options) {
         strict: false
     }));
 
-    // initialize routes
-    options.routes(app);
-
     app.use(require("../middlewares/sendHttpError"));
 
+    // init callback
+    if (_.isFunction(options.init)) {
+        options.init(app);
+    }
+
+    // error handling
     app.use(function (err, request, response, next) {
         if (typeof err == "number") {
             err = new HttpError(err);
@@ -32,9 +36,14 @@ module.exports = function (options) {
         response.sendHttpError(err);
     });
 
+    // before start callback
+    if (_.isFunction(options.beforeStart)) {
+        options.beforeStart(app);
+    }
+
     http.createServer(app).listen(options.port);
 
-    log.info(options.name + ' listening ' + options.port + ' port.');
+    log.info('"' + options.name + '" service listens ' + options.port + ' port.');
 
     return app;
 };
