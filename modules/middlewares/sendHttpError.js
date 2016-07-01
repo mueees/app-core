@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (error, request, response, next) {
+module.exports = function (request, response, next) {
     response.sendHttpError = function (error) {
         response.status(error.status || 500);
 
@@ -9,5 +9,5 @@ module.exports = function (error, request, response, next) {
         });
     };
 
-    next(error);
+    next();
 };

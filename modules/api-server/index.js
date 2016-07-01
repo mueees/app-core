@@ -16,19 +16,19 @@ module.exports = function (options) {
         strict: false
     }));
 
+    app.use(require("../middlewares/sendHttpError"));
+
     // init callback
     if (_.isFunction(options.init)) {
         options.init(app);
     }
 
-    app.use(require("../middlewares/sendHttpError"));
-
     // error handling
     app.use(function (err, request, response, next) {
         if (typeof err == "number") {
             err = new HttpError(err);
-        } else if (err instanceof HttpError) {
-
+        } else if (err.name === 'HttpError') {
+            // TODO: Rewrite to instanceof
         } else {
             err = new HttpError(500, 'Fatal server error');
         }
