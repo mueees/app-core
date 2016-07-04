@@ -1,7 +1,5 @@
 'use strict';
 
-const request = require('request');
-
 /**
  * request module cannot return promise, that is why we should handle it by yourself
  * Resolve promise only when statusCode = 200
@@ -12,6 +10,10 @@ const request = require('request');
  * data - Object - Only when method is POST or PUT
  *
  * */
+
+const request = require('request');
+const log = require('../log')(module);
+
 module.exports = function (options) {
     return new Promise(function (resolve, reject) {
         // TODO use ES6 destruction
@@ -28,6 +30,8 @@ module.exports = function (options) {
 
         request(requestData, function (error, response, body) {
             if (error) {
+                log.error(error.message);
+
                 reject({
                     status: 500,
                     message: 'Cannot execute request'
@@ -38,12 +42,10 @@ module.exports = function (options) {
                     message: body.message
                 });
             } else {
-                if ((options.method === 'POST' || options.method === 'PUT') && options.data) {
-                    try {
-                        body = JSON.parse(body);
-                    } catch (e) {
-                        // do nothing
-                    }
+                try {
+                    body = JSON.parse(body);
+                } catch (e) {
+                    // do nothing
                 }
 
                 resolve({
