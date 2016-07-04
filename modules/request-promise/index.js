@@ -24,7 +24,6 @@ module.exports = function (options) {
         if ((options.method === 'POST' || options.method === 'PUT') && options.data) {
             requestData.json = true;
             requestData.body = options.data;
-            //requestData.body = JSON.stringify(options.data);
         }
 
         request(requestData, function (error, response, body) {
@@ -39,6 +38,14 @@ module.exports = function (options) {
                     message: body.message
                 });
             } else {
+                if ((options.method === 'POST' || options.method === 'PUT') && options.data) {
+                    try {
+                        body = JSON.parse(body);
+                    } catch (e) {
+                        // do nothing
+                    }
+                }
+
                 resolve({
                     body: body,
                     response: response
