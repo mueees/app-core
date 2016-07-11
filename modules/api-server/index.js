@@ -33,6 +33,9 @@ module.exports = function (options) {
             err = new HttpError(500, 'Fatal server error');
         }
 
+        // log error to console
+        log.error(err.message);
+
         response.sendHttpError(err);
     });
 
