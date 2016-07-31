@@ -12,9 +12,9 @@ module.exports = function (options) {
 
     var app = express();
 
-    app.use(bodyParser.json({
-        strict: false
-    }));
+    console.log("JSON");
+    app.use(bodyParser.json({type: 'application/json'}));
+
 
     app.use(require("../middlewares/sendHttpError"));
 
