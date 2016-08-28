@@ -5,10 +5,10 @@ module.exports = function (request, response, next) {
         response.status(error.status || 500);
 
         response.send({
-            message: error.message
+            message: error.message,
+            data: error.data
         });
     };
-
 
     next();
 };
