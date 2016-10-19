@@ -1,7 +1,7 @@
 'use strict';
 
 let HttpError = require('./http-error');
-let assert = require('chai').assert;
+let assert = require('../assert');
 
 exports.HttpError = HttpError;
 

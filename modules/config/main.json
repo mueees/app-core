@@ -1,8 +1,8 @@
 {
   "services": {
     "hub": {
-      "host": "127.0.0.1",
-      "port": 9000
+      "port": 20000,
+      "url": "http://hub.mue.in.ua"
     }
   }
 }

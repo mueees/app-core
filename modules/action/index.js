@@ -2,7 +2,7 @@
 
 let _ = require('lodash');
 let config = require('../config');
-let assert = require('chai').assert;
+let assert = require('../assert');
 
 let actionDescriptors = [];
 

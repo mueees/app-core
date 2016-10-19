@@ -1,7 +1,7 @@
 'use strict';
 
 let env = require('../environment');
-let assert = require('chai').assert;
+let assert = require('../assert');
 
 class Logger {
     constructor(module) {

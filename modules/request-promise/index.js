@@ -11,11 +11,15 @@
  *
  * */
 
+let assert = require('../assert');
 const request = require('request');
 const log = require('../log')(module);
 
 module.exports = function (options) {
     return new Promise(function (resolve, reject) {
+        assert.isString(options.url);
+        assert.isString(options.method);
+
         // TODO use ES6 destruction
         var requestData = {
             url: options.url,
@@ -48,10 +52,16 @@ module.exports = function (options) {
                     // do nothing
                 }
 
-                resolve({
-                    body: body,
-                    response: response
-                });
+                let res = body;
+
+                if(options.fullResponse === true){
+                    res = {
+                        body: body,
+                        response: response
+                    };
+                }
+
+                resolve(res);
             }
         });
     });

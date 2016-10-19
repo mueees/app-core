@@ -1,7 +1,7 @@
 var http = require('http'),
     express = require('express'),
     _ = require('lodash'),
-    assert = require('chai').assert,
+    assert = require('../assert'),
     bodyParser = require('body-parser'),
     HttpError = require('../error').HttpError,
     log = require('../log')(module);
