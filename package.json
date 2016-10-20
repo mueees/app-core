@@ -25,6 +25,7 @@
     "mocha": "^2.5.3",
     "mongoose": "^4.4.20",
     "nconf": "^0.8.4",
+    "nodemailer": "^2.6.4",
     "request": "2.72.0",
     "validator": "^6.1.0"
   }

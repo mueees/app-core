@@ -9,12 +9,10 @@ const DEFAULT_METHOD = 'GET';
 
 /**
  * Alias for making request only to HUB service
- * Define base url based on environment
  * Build url for making request
  * */
-
 class RequestToServiceAction extends RequestAction {
-    execute (options) {
+    execute(options) {
         assert.isString(options.service);
         assert.isString(options.url);
 
@@ -24,7 +22,7 @@ class RequestToServiceAction extends RequestAction {
     buildRequestOptions(options) {
         let url;
 
-        switch (true){
+        switch (true) {
             case env.isProduction():
                 url = config.get('services:hub:url');
                 break;
