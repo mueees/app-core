@@ -10,10 +10,24 @@
  * data - Object - Only when method is POST or PUT
  *
  * */
-
 let assert = require('../assert');
 const request = require('request');
 const log = require('../log')(module);
+
+/**
+ SUCCESS:
+ 1xx Informational.
+ 2xx Success.
+ 3xx Redirection.
+
+ ERROR:
+ 4xx Client Error.
+ 5xx Server Error.
+ * */
+
+function isSuccessResponse(response) {
+    return response.statusCode < 400;
+}
 
 module.exports = function (options) {
     return new Promise(function (resolve, reject) {
@@ -40,29 +54,26 @@ module.exports = function (options) {
                     status: 500,
                     message: 'Cannot execute request'
                 });
-            } else if (response.statusCode != 200) {
-                reject({
-                    status: response.statusCode,
-                    message: body.message
-                });
-            } else {
-                try {
-                    body = JSON.parse(body);
-                } catch (e) {
-                    // do nothing
-                }
 
-                let res = body;
-
-                if(options.fullResponse === true){
-                    res = {
-                        body: body,
-                        response: response
-                    };
-                }
-
-                resolve(res);
+                return;
             }
+
+            try {
+                body = JSON.parse(body);
+            } catch (e) {
+                // do nothing
+            }
+
+            let res = body;
+
+            if (options.fullResponse === true) {
+                res = {
+                    body: body,
+                    response: response
+                };
+            }
+
+            isSuccessResponse(response) ? resolve(res) : reject(res);
         });
     });
 };
