@@ -1,46 +1,10 @@
 'use strict';
+let action = require('../../action');
+let RequestToService = require('./request-to-service.action');
 
-let config = require('../../config');
-let env = require('../../environment');
-let assert = require('../../assert');
-let RequestAction = require('../request');
+action.registerAction({
+    name: 'requestToService',
+    action: RequestToService
+});
 
-const DEFAULT_METHOD = 'GET';
-
-/**
- * Alias for making request only to HUB service
- * Build url for making request
- * */
-class RequestToServiceAction extends RequestAction {
-    execute(options) {
-        assert.isString(options.service);
-        assert.isString(options.url);
-
-        return super.execute(this.buildRequestOptions(options));
-    }
-
-    buildRequestOptions(options) {
-        let url;
-
-        switch (true) {
-            case env.isProduction():
-                url = config.get('services:hub:url');
-                break;
-
-            case env.isDevelopment() || env.isTest():
-                url = 'http://localhost:' + config.get('services:hub:port');
-                break;
-        }
-
-        url += '/service/' + options.service + options.url;
-
-        return {
-            url: url,
-            method: options.method || DEFAULT_METHOD,
-            data: options.data,
-            fullResponse: options.fullResponse === true
-        }
-    }
-}
-
-module.exports = RequestToServiceAction;
+exports.RequestToService = RequestToService;

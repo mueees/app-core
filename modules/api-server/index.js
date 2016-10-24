@@ -23,6 +23,8 @@ module.exports = function (options) {
 
     // error handling
     app.use(function (err, request, response, next) {
+        log.error(err.message);
+
         if (typeof err == "number") {
             err = new HttpError(err);
         } else if (err.name === 'HttpError') {
