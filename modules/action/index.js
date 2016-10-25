@@ -3,6 +3,7 @@
 let _ = require('lodash');
 let config = require('../config');
 let assert = require('../assert');
+let log = require('../log')(module);
 
 let actionDescriptors = [];
 
@@ -26,13 +27,21 @@ function getActionDescriptor(name) {
 function getAction(name) {
     var actionDescriptor = getActionDescriptor(name);
 
-    assert.isDefined(actionDescriptor);
-
-    return new actionDescriptor.action();
+    return actionDescriptor ? new actionDescriptor.action() : null;
 }
 
 function execute(name, data) {
-    return getAction(name).execute(data);
+    return new Promise(function (resolve, reject) {
+        let action = getAction(name);
+
+        if (action) {
+            action.execute(data).then(resolve).catch(reject);
+        } else {
+            log.error('Cannot find action: ' + name);
+
+            reject('Cannot find action');
+        }
+    });
 }
 
 exports.execute = execute;

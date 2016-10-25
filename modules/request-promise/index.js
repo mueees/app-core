@@ -10,7 +10,6 @@
  * data - Object - Only when method is POST or PUT
  *
  * */
-let assert = require('../assert');
 const request = require('request');
 const log = require('../log')(module);
 
@@ -31,9 +30,6 @@ function isSuccessResponse(response) {
 
 module.exports = function (options) {
     return new Promise(function (resolve, reject) {
-        assert.isString(options.url);
-        assert.isString(options.method);
-
         // TODO use ES6 destruction
         var requestData = {
             url: options.url,
@@ -52,7 +48,7 @@ module.exports = function (options) {
 
                 reject({
                     status: 500,
-                    message: 'Cannot execute request'
+                    message: 'Server problem. Please try again'
                 });
 
                 return;

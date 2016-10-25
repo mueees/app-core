@@ -6,8 +6,5 @@ let assert = require('../assert');
 exports.HttpError = HttpError;
 
 exports.getHttpError = function (code, message, data) {
-    assert.isNumber(code);
-    assert.isString(message);
-
     return new HttpError(code, message, data);
 };

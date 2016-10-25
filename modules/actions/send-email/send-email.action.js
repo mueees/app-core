@@ -3,19 +3,27 @@
 let BaseAction = require('../base');
 let EmailSender = require('../../email').EmailSender;
 
+let _ = require('lodash');
+
 class SendEmailAction extends BaseAction {
     execute(options) {
         return new Promise(function (resolve, reject) {
             let emailSender = new EmailSender({
                 service: options.service,
                 user: options.user,
-                password: options.password
+                password: options.password,
+                subject: options.subject
             });
 
-            emailSender.send({
-                to: options.to,
-                from: options.from
-            }).then(function () {
+            let emailOptions = _.pick(options, [
+                'to',
+                'from',
+                'body',
+                'html',
+                'text'
+            ]);
+
+            emailSender.send(emailOptions).then(function () {
                 resolve();
 
                 emailSender.close();

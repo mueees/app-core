@@ -2,7 +2,7 @@ let action = require('../../action');
 let SendEmailAction = require('./send-email.action');
 
 action.registerAction({
-    name: 'SendEmail',
+    name: 'sendEmail',
     action: SendEmailAction
 });
 
