@@ -24,9 +24,9 @@ class RequestToServiceAction extends RequestAction {
                     resolve(response);
                 })
                 .catch(function (responseData) {
-                    log.error('404 internal request: ' + requestOptions.url);
-
                     if (responseData.response.statusCode === 404) {
+                        log.error('404 internal request: ' + requestOptions.url);
+
                         responseData.body = responseData.response.body = {
                             message: 'Server error. Please ty again'
                         }
