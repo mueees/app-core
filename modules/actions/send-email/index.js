@@ -1,3 +1,5 @@
+'use strict';
+
 let action = require('../../action');
 let SendEmailAction = require('./send-email.action');
 
