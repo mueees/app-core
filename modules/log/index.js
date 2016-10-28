@@ -13,7 +13,7 @@ class Logger {
     }
 
     info(message) {
-        console.log(message);
+        console.info(message);
     }
 
     // only should be visible on development mode
