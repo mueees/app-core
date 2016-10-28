@@ -43,13 +43,23 @@ module.exports = function (options) {
         }
 
         request(requestData, function (error, response, body) {
+            let res;
+
             if (error) {
                 log.error(error.message);
 
-                reject({
-                    status: 500,
-                    message: 'Server problem. Please try again'
-                });
+                if (options.fullResponse === true) {
+                    res = {
+                        body: body,
+                        response: response
+                    };
+                } else {
+                    res = {
+                        message: 'Server problem. Please try again'
+                    };
+                }
+
+                reject(res);
 
                 return;
             }
@@ -60,7 +70,7 @@ module.exports = function (options) {
                 // do nothing
             }
 
-            let res = body;
+            res = body;
 
             if (options.fullResponse === true) {
                 res = {
