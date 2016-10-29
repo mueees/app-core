@@ -11,8 +11,7 @@ class SendEmailAction extends BaseAction {
             let emailSender = new EmailSender({
                 service: options.service,
                 user: options.user,
-                password: options.password,
-                subject: options.subject
+                password: options.password
             });
 
             let emailOptions = _.pick(options, [
@@ -20,7 +19,8 @@ class SendEmailAction extends BaseAction {
                 'from',
                 'body',
                 'html',
-                'text'
+                'text',
+                'subject'
             ]);
 
             emailSender.send(emailOptions).then(function () {
