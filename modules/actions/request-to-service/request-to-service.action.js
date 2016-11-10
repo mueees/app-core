@@ -29,7 +29,7 @@ class RequestToServiceAction extends RequestAction {
                             log.error('404 internal request: ' + requestOptions.url);
 
                             responseData.body = responseData.response.body = {
-                                message: 'Server error. Please ty again'
+                                message: '404 internal request: ' + requestOptions.url
                             }
                         }
                     } else {

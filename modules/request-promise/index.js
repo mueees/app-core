@@ -28,12 +28,15 @@ function isSuccessResponse(response) {
     return response.statusCode < 400;
 }
 
+let DEFAULT_TIMEOUT = 4000; // 4 second
+
 module.exports = function (options) {
     return new Promise(function (resolve, reject) {
         // TODO use ES6 destruction
         var requestData = {
             url: options.url,
-            method: options.method
+            method: options.method,
+            timeout: options.timeout || DEFAULT_TIMEOUT
         };
 
         // serialize data if method is POST or PUT
