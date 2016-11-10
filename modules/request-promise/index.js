@@ -28,7 +28,7 @@ function isSuccessResponse(response) {
     return response.statusCode < 400;
 }
 
-let DEFAULT_TIMEOUT = 4000; // 4 second
+let DEFAULT_TIMEOUT = 15000; // 10 second
 
 module.exports = function (options) {
     return new Promise(function (resolve, reject) {
